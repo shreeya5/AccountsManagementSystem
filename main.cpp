@@ -1,7 +1,7 @@
 #include <iostream>
 #include <strings>
 
-using namespace std; 
+using namespace std;
 
 
 struct Category
@@ -17,4 +17,7 @@ struct User
 	double budget;
 };
 
-
+void DisplayMainMenu()
+{
+	cout << "0: exit \n";
+}
