@@ -15,30 +15,88 @@ void Login_screen()
 
 void main()
 {
-	AccountHolder 
-	Login_Screen()
-	int userChoice;
-	string name;
 	AccountHolder user;
+	Login_Screen()
+	int userChoice, no_of_users=0, choice_of_action;
+	string name, username;
 	cin >> userChoice;
+	
+	string usernames[100];
+	ofstream fout;
+	ifstream fin;
+	fin.open("userids.txt");
+	while(getline(fin, username))
+	{
+		usernames[no_of_users] = username;
+		i++;
+	}
+	fin.close();
+		
+	switch(userChoice)
+	{
+		case 1:
+			cout << "Please enter your desired username : " ;
+			cin << name;
+			for(int j=0; j<no_of_users; j++)
+			{
+				if(name==usernames[j)
+				{
+					cout << "Username already exists. Please try another one." << endl;
+					cin << name;
+					j=-1;
+				}
+			}
+			user.username = name;
+			usernames[no_of_users] = name;
+			no_of_users++;
+			break;
+			
+		case 2:
+			cout << "Please enter your username : " ;
+			cin << name;
+			bool usernameExists = false;
+			for(int j=0; j<no_of_users; j++)
+			{
+				if(name==usernames[j])
+				{
+					usernameExists = true;
+					break;
+				}
+			}
+			if(usernameExists==false)
+			{
+				cout << "Username does not esist." << endl;
+				exit(1);
+			}
+			break;
+		
+		default:
+			cout << "Invalid Input!" << endl;
+	}
+	
+	//updating file userids.txt 
+	
+	fout.open("userids.txt")
+	if(fout.fail())
+	{
+		cout << "Error in opening Userids.txt"<< "\n";
+		exit(1);
+	}
+	for(int j = 0; j<no_of_users; j++)
+	{
+		fout << usernames[j] << "\n";
+	}
+	fout.close();
+	
+	
+	
 	
 	do
 	{
-		switch(userChoice)
-		{
-			case 1:
-				cout << "Enter desired username :" ;
-				cin << name;
-				for(int i=0; i<AccountHolders.size(); i++)
-				{
-					if(name==AccountHolders[i].username)
-					{
-						cout << "Username already exists. Please enter another one."
-						cin << name;
-						i=0;
-					}
-				}
-				AccountHolders.push_back(name);
-		}
-	}
+		user.MainMenu();
+		cout << "Please enter your choice : ";
+		cin << choice_of_action;
+		user.ManageCommands(choice_of_action);
+	}while(choice_of_action != x);
+	
 }
