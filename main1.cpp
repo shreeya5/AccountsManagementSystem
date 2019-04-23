@@ -1,12 +1,7 @@
 #include <iostream>
 using namespace std;
-void main()
+int main()
 {
-cout <<"This is cool"<<"\n";
-cout<<"We are on the master branch";
+cout <<"Kaiko re"<<endl;
+return 0;
 }
-//Hey
-
-
-
-
