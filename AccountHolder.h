@@ -12,6 +12,11 @@ struct Account
 class AccountHolder
 {
 	public:
+		void ManageExpenses();
+		void ManageIncomes();
+		void ManageBudget();
+		void MainMenu();
+		void ManageCommands();
 		
 	
 	
