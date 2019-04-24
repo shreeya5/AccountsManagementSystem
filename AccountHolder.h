@@ -17,8 +17,11 @@ class AccountHolder
 		void BudgetCheck(double);
 		void ManageBudget();
 		void ManageAccountLogs();
+		void TransferAmount();
+		void ViewStats();
 		void MainMenu();
 		void ManageCommands(int);
+		
 		
 	
 	
