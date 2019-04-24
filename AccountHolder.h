@@ -5,8 +5,8 @@ using namespace std;
 
 struct Account
 {
-	string type[100];
-	double value[100];
+	vector <string> category;
+	vector <double> value;
 };
 
 class AccountHolder
@@ -14,15 +14,17 @@ class AccountHolder
 	public:
 		void ManageExpenses();
 		void ManageIncomes();
+		void BudgetCheck(double);
 		void ManageBudget();
+		void ManageAccountLogs();
 		void MainMenu();
-		void ManageCommands();
+		void ManageCommands(int);
 		
 	
 	
 	string username;
 	double budget;
-	Account Income, Expense;	
+	Account income, expense, logs;	
 		
 };
 
