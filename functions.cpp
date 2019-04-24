@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//Function to check if budget has been reached
 void AccountHolder::BudgetCheck(double sum)
 {
 	if (budget-sum == 0)
@@ -17,7 +18,7 @@ void AccountHolder::BudgetCheck(double sum)
 	}
 }
 
-
+//Function to manage expenses : add/edit/delete/view
 void AccountHolder::ManageExpenses()
 {
 	cout << "*************** Expense Management ***************\n" << endl;
@@ -159,7 +160,7 @@ void AccountHolder::ManageExpenses()
 }
 	
 
-
+//Function to manage incomes : add/edit/delete/view
 void AccountHolder::ManageIncomes()
 {
 	cout << "*************** Income Management ***************\n" << endl;
@@ -277,7 +278,7 @@ void AccountHolder::ManageIncomes()
 }
 
 
-
+//Function to manage budget : set a new budget/ check budget
 void AccountHolder::ManageBudget()
 {
 	cout << "*************** Budget Management ***************\n" << endl;
@@ -324,6 +325,7 @@ void AccountHolder::ManageBudget()
 }
 
 
+//Function to manage account logs : add/edit/delete/view
 void AccountHolder::ManageAccountLogs()
 {
 	cout << "*************** Account Logs Management ***************\n" << endl;
@@ -410,7 +412,75 @@ void AccountHolder::ManageAccountLogs()
 }
 
 
+//Function to Transfer amount from one account to another
+void AccountHolder::TransferAmount()
+{
+	int from, to;
+	double amount;
+	cout << "*************** Transfer Money ***************\n" << endl;
+	if(logs.category.size()<2)
+	{
+		cout << "Minimum 2 accounts required to transfer money. Please create another account first." << endl;
+	}
+	else
+	{
+		cout << "Existing account logs : " << endl;
+		for(int i=0; i<logs.category.size(); i++)
+		{
+			cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
+		}
+		cout << "Which account do you want to transfer from? ";
+		cin >> from;
+		cout << "Which account do you want to transfer to? " ;
+		cin >> to;
+		cout << "Amount to be transfered : HK$" ;
+		cin >> amount;
+		logs.value[from-1] = logs.value[from-1] - amount;
+		logs.value[to-1] = logs.value[to-1] + amount;
+		cout << "Successfully transfered amount!" << endl;
+		
+	}
+}
 
+
+//Function to view overall statistics of income, expenses, account logs and budget
+void AccountHolder::ViewStats()
+{
+	cout << "*************** View Overall Statistics ***************\n" << endl;
+	cout << "\n Income: \n" ;
+	double incomes = 0;
+	for(int i=0; i<income.category.size(); i++)
+	{
+		cout << i+1 << " - " << income.category[i] << " HK$" << income.value[i] << endl;
+		incomes = incomes + income.value[i];
+	}
+	cout << "\n Total Income : HK$" << incomes << endl;
+	cout << "\n Expenses: \n";
+	double expenses=0;
+	for(int i=0; i<expense.category.size(); i++)
+	{
+		cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
+		expenses = expenses + expense.value[i];
+	}
+	cout << "\n Total Expense : HK$" << expenses << endl;
+	cout << "\n Account logs \n";
+	for(int i=0; i<logs.category.size(); i++)
+	{
+		cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
+	}
+	cout << "\n Budget : ";
+	double total=0 , budgetLeft=0;
+	for(int i=0; i<expense.category.size(); i++)
+	{
+		total = total + expense.value[i];
+	}
+	cout << "Budget left : HK$" << total-budget << endl;
+	budgetLeft = (total/budget)*100;
+	cout << "Percentage of budget spent : " << budgetLeft << "%" << endl;
+}
+
+
+//Function to display the main menue with different fucntions
 void AccountHolder::MainMenu()
 {
 	cout << "welcome to your Accounts Management System" << endl;
@@ -419,25 +489,38 @@ void AccountHolder::MainMenu()
 	cout << "2. Manage Incomes." << endl;
 	cout << "3. Manage Budget." << endl;
 	cout << "4. Manage Account Logs" << endl;
+	cout << "5. Transfer money." << endl;
+	cout << "6. View Overall Statistics." << endl; 
 	
 	
 	
 	cout << "x. Exit" << endl;
 }
 
+
+//Function to coordinate user input
 void AccountHolder::ManageCommands(int choice_of_action)
 {
 	switch(choice_of_action)
 	{
 		case 1:
 			ManageExpenses();
+			break;
 		case 2:
 			ManageIncomes();
+			break;
 		case 3: 
 			ManageBudget();
+			break;
 		case 4:
-			ManageAccountLogs();	
-			
+			ManageAccountLogs();
+			break;
+		case 5:
+			TransferAmount();
+			break;		
+		case 6:
+			ViewStats();
+			break;	
 			
 			
 			
