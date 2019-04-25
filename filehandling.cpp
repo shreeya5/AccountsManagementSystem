@@ -88,3 +88,45 @@ void AccountHolder::readFromFile()
   fin >> budget;
   fin.close();
 }
+
+void AccountHolder::writeToFile()
+{
+  int i;
+  ofstream fout;
+  fout.open((username+".txt").c_str());
+  for (i=0;i<income.category.size();i++)
+  {
+    fout << income.category[i]<<" ";
+  }
+  fout<<endl;
+  for (i=0;i<income.value.size();i++)
+  {
+    fout << income.value[i]<<" ";
+  }
+  fout<<endl;
+  fout<<endl;
+  for (i=0;i<expense.category.size();i++)
+  {
+    fout << expense.category[i]<<" ";
+  }
+  fout<<endl;
+  for (i=0;i<expense.value.size();i++)
+  {
+    fout << expense.value[i]<<" ";
+  }
+  fout<<endl;
+  fout<<endl;
+  for (i=0;i<logs.category.size();i++)
+  {
+    fout << logs.category[i]<<" ";
+  }
+  fout<<endl;
+  for (i=0;i<logs.value.size();i++)
+  {
+    fout << logs.value[i]<<" ";
+  }
+  fout<<endl;
+  fout<<endl;
+  fout<<budget;
+  fout.close();
+}
