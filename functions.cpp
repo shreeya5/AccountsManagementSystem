@@ -526,7 +526,7 @@ void AccountHolder::ManageCommands(int choice_of_action)
 
 
 
-		case x:
+		case 7:
 			cout << "Thank you for using Accounts Management System!" << endl;
 			break;
 

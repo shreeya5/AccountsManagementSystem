@@ -93,14 +93,14 @@ int main()
 	}
 	fout.close();
 
-
-
+	user.readFromFile();
 	do
 	{
 		user.MainMenu();
 		cout << "Please enter your choice : ";
 		cin >> choice_of_action;
 		user.ManageCommands(choice_of_action);
-	}while(choice_of_action != x);
+	}while(choice_of_action != 7);
+	user.writeToFile();
 	return 0;
 }
