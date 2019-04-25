@@ -12,6 +12,8 @@ struct Account
 class AccountHolder
 {
 	public:
+		void readFromFile();
+		void writeToFile();
 		void ManageExpenses();
 		void ManageIncomes();
 		void BudgetCheck(double);
@@ -21,13 +23,12 @@ class AccountHolder
 		void ViewStats();
 		void MainMenu();
 		void ManageCommands(int);
-		
-		
-	
-	
+
+
+
+
 	string username;
 	double budget;
-	Account income, expense, logs;	
-		
-};
+	Account income, expense, logs;
 
+};
