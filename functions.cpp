@@ -53,7 +53,7 @@ void AccountHolder::ManageExpenses()
 			case 1:
 				break;
 			case 2:
-				cout << "Which account do you want to deduct the expense from? : Enter the corresponding number.";
+				cout << "Which account do you want to deduct the expense from? : Enter the corresponding number.\n";
 				for(int i=0; i<logs.category.size(); i++)
 				{
 					cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
@@ -159,16 +159,14 @@ void AccountHolder::ManageExpenses()
 			default:
 				cout << "\nInvalid input\n" << endl;
 		}
-
-		cout << "Current Expenses : " << endl;
-		for(int i=0; i<expense.category.size(); i++)
+		if (choice!=5)
 		{
-			cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
+			cout << "Current Expenses : " << endl;
+			for(int i=0; i<expense.category.size(); i++)
+			{
+				cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
+			}
 		}
-
-
-
-
 	} while(choice!=1);
 }
 
@@ -199,7 +197,7 @@ void AccountHolder::ManageIncomes()
 				break;
 
 			case 2:
-				cout << "Which account do you want to add income to? Enter the corresponding number. ";
+				cout << "Which account do you want to add income to? Enter the corresponding number. \n";
 				for(int i=0; i<logs.category.size(); i++)
 				{
 					cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
@@ -263,8 +261,8 @@ void AccountHolder::ManageIncomes()
 					}
 					cin >> deleteChoice;
 					logs.value[accountChoice-1] = logs.value[accountChoice-1] - income.value[deleteChoice-1];
-					expense.category.erase(expense.category.begin()+deleteChoice-1);
-					expense.value.erase(expense.value.begin()+deleteChoice-1);
+					income.category.erase(income.category.begin()+deleteChoice-1);
+					income.value.erase(income.value.begin()+deleteChoice-1);
 					cout << "\nSuccessfully deleted the selected income!\n" << endl;
 				}
 				else
@@ -306,7 +304,7 @@ void AccountHolder::ManageBudget()
 	do
 	{
 		cout << endl;
-		for(int i=0; i<4; i++)
+		for(int i=0; i<3; i++)
 		{
 		cout << i+1 << " - " << BudgetMenu[i] << endl;
 		}
@@ -404,7 +402,7 @@ void AccountHolder::ManageAccountLogs()
 			case 4:
 				if(!logs.category.empty())
 				{
-					cout << "Which account log would you like to delete? Enter the corresponding number." << endl;
+					cout << "Which account log would you like to delete? Enter the corresponding number. \n" << endl;
 					for(int i=0; i<logs.category.size(); i++)
 					{
 						cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
@@ -453,9 +451,9 @@ void AccountHolder::TransferAmount()
 		{
 			cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
 		}
-		cout << "Which account do you want to transfer from? Enter the corresponding number.";
+		cout << "Which account do you want to transfer from? Enter the corresponding number. \n";
 		cin >> from;
-		cout << "Which account do you want to transfer to? Enter the corresponding number." ;
+		cout << "Which account do you want to transfer to? Enter the corresponding number. \n" ;
 		cin >> to;
 		cout << "Amount to be transfered : HK$" ;
 		cin >> amount;
@@ -512,7 +510,7 @@ void AccountHolder::MainMenu()
 	cout << "1. Manage Expenses." << endl;
 	cout << "2. Manage Incomes." << endl;
 	cout << "3. Manage Budget." << endl;
-	cout << "4. Manage Account Logs" << endl;
+	cout << "4. Manage Account Logs." << endl;
 	cout << "5. Transfer money." << endl;
 	cout << "6. View Overall Statistics." << endl;
 	cout << "7. Exit" << endl;
