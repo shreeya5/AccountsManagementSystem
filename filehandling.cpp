@@ -10,10 +10,11 @@ void AccountHolder::readFromFile()
   string line, group;
   double amount;
   ifstream fin;
-  fin.open((username+".txt").c_str());
+  string filename = username + ".txt";
+  fin.open(filename.c_str());
   if (fin.fail())
   {
-    cout << "Failed to open "<<username <<".txt"<< endl;
+    //cout << "Failed to open "<<username <<".txt"<< endl;
     return;
   }
   j = 0;
