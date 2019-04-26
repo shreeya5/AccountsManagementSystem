@@ -11,7 +11,7 @@ void Login_Screen()
 	cout << "1. Do you want to create a new account?" << endl;
 	cout << "2. Do you want to log in an existing account?" << endl;
 	cout << "3. Close application."<<endl;
-	cout << "Please enter your prefered option : ";
+	cout << "\nPlease enter your prefered option : ";
 }
 
 int main()
@@ -22,6 +22,12 @@ int main()
 	string name, username;
 	bool usernameExists;
 	cin >> userChoice;
+	if(userChoice != 3)
+	{
+		cout<< "\nPlease enter username : ";
+		cin.ignore();
+		getline(cin,name);
+	}
 
 	vector <string> usernames;
 	ofstream fout;
@@ -36,13 +42,11 @@ int main()
 	switch(userChoice)
 	{
 		case 1:
-			cout << "Please enter your desired username : " ;
-			getline(cin,name);
-			for(int j=0; j<username.size(); j++)
+			for(int j=0; j<usernames.size(); j++)
 			{
 				if(name==usernames[j])
 				{
-					cout << "Username already exists. Please try another one." << endl;
+					cout << "Username already exists. Please enter another one." << endl;
 					getline(cin,name);
 					j=-1;
 				}
@@ -52,8 +56,6 @@ int main()
 			break;
 
 		case 2:
-			cout << "Please enter your username : " ;
-			getline(cin,name);
 			usernameExists = false;
 			for(int j=0; j<usernames.size(); j++)
 			{

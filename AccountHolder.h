@@ -1,5 +1,9 @@
+#ifndef AccountHolder_h
+#define AccountHolder_h
+
 #include <vector>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -13,18 +17,16 @@ class AccountHolder
 {
 	public:
 		void readFromFile();
-		void writeToFile();
+		void BudgetCheck(double);
 		void ManageExpenses();
 		void ManageIncomes();
-		void BudgetCheck(double);
 		void ManageBudget();
 		void ManageAccountLogs();
 		void TransferAmount();
 		void ViewStats();
 		void MainMenu();
 		void ManageCommands(int);
-
-
+		void writeToFile();
 
 
 	string username;
@@ -32,3 +34,5 @@ class AccountHolder
 	Account income, expense, logs;
 
 };
+
+#endif
