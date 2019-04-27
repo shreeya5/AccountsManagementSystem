@@ -49,7 +49,6 @@ int main()
 			do
 			{
 				cout <<"\nEnter today's date in dd/mm/yy format : ";
-				cin.ignore();
 				getline(cin,d);
 				flag2 = user.Check_date(d);
 			} while(flag2 == false);

@@ -32,6 +32,7 @@ This menu driven program will create .txt files for all its respective users and
 > make run
 4. Use the AccountsManagementSystem by following the instructions on the screen. 
 
+Video Tutorial: https://youtu.be/DSqv3BW1lN4
  
 
 ## How does our System meet the Project Requirements?
