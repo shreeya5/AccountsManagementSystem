@@ -1,5 +1,5 @@
 #ifndef AccountHolder_h
-#define AccountHolder_h
+#define AccountHolder_h //guards
 
 #include <vector>
 #include <string>
@@ -16,6 +16,8 @@ struct Account
 class AccountHolder
 {
 	public:
+		//function prototypes of all functions used in filehandling.cpp, functions.cpp and main.cpp
+
 		void readFromFile();
 		void BudgetCheck(double);
 		void ManageExpenses();
@@ -28,7 +30,7 @@ class AccountHolder
 		void ManageCommands(int);
 		void writeToFile();
 
-
+	//the following variables are public as they are used by the three aforementioned .cpp files
 	string username;
 	double budget;
 	Account income, expense, logs;

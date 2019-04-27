@@ -14,11 +14,12 @@ void AccountHolder::readFromFile()
   fin.open(filename.c_str());
   if (fin.fail())
   {
-    //cout << "Failed to open "<<username <<".txt"<< endl;
+    //cout << "Failed to open "<<username <<".txt"<< endl;//commented out because the file is being created only when the user finally exits the application
     return;
   }
   j = 0;
   getline(fin,line);
+  //taking inputs for the category of incomes and storing them in the vector income.category
   for (i = 0; i<line.length();i++)
   {
     if (line[i]==' ')
@@ -30,6 +31,7 @@ void AccountHolder::readFromFile()
   }
   j = 0;
   getline(fin,line);
+  //taking inputs for the value of incomes and storing them in the vector income.value
   for (i = 0; i<line.length();i++)
   {
     if (line[i]==' ')
@@ -42,6 +44,7 @@ void AccountHolder::readFromFile()
   fin.ignore();
   j = 0;
   getline(fin,line);
+  //taking inputs for the category of expenses and storing them in the vector expense.category
   for (i = 0; i<line.length();i++)
   {
     if (line[i]==' ')
@@ -53,6 +56,7 @@ void AccountHolder::readFromFile()
   }
   j = 0;
   getline(fin,line);
+  //taking inputs for the value of expenses and storing them in the vector expense.value
   for (i = 0; i<line.length();i++)
   {
     if (line[i]==' ')
@@ -65,6 +69,7 @@ void AccountHolder::readFromFile()
   fin.ignore();
   j = 0;
   getline(fin,line);
+  //taking inputs for the category of accountlog and storing them in the vector logs.category
   for (i = 0; i<line.length();i++)
   {
     if (line[i]==' ')
@@ -76,6 +81,7 @@ void AccountHolder::readFromFile()
   }
   j = 0;
   getline(fin,line);
+  //taking inputs for the value of accountlog and storing them in the vector logs.value
   for (i = 0; i<line.length();i++)
   {
     if (line[i]==' ')
@@ -95,6 +101,7 @@ void AccountHolder::writeToFile()
   int i;
   ofstream fout;
   fout.open((username+".txt").c_str());
+  //writing categories and values of income, expense and log respectively
   for (i=0;i<income.category.size();i++)
   {
     fout << income.category[i]<<" ";
@@ -130,4 +137,4 @@ void AccountHolder::writeToFile()
   fout<<endl;
   fout<<budget;
   fout.close();
-}
+}//End of filehandling.cpp
