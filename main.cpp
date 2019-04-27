@@ -14,6 +14,20 @@ void Login_Screen()
 	cout << "3. Close application."<<endl;
 	cout << "\nPlease enter your prefered option : ";
 }
+bool AccountHolder::Check_date(string x)
+{
+	int monthdates[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+	int dd, mm, yy, i;
+	dd = stoi(x.substr(0,2));
+  mm = stoi(x.substr(3,2));
+  yy = stoi(x.substr(6,2));
+  if(x.length()!= 8 || x[2]!= '/' || x[5]!= '/' || mm < 0 || mm > 12 || dd < 0 || dd > monthdates[mm]|| yy<0)
+  {
+    cout << "Incompatible.\n";
+    return false;
+  }
+  return true;
+}
 
 //Function to coordinate login/sign up options and further user inputs
 int main()
@@ -22,17 +36,25 @@ int main()
 	Login_Screen();
 	int userChoice, choice_of_action;
 	string name, username;
-	bool usernameExists, flag;
+	bool usernameExists, flag, flag2;
 	cin >> userChoice; //taking user input from login screen
 	flag = false;
+	flag2 = false;
+	string d;
 	if(userChoice != 3)
 	{
-		cout<< "\nPlease enter username : ";
-		cin.ignore();
-		getline(cin, name);
-		cout <<"\nEnter today's date in dd/mm/yy format : ";
-		getline(cin, user.date);
+			cout<< "\nPlease enter username : ";
+			cin.ignore();
+			getline(cin,name);
+			do
+			{
+				cout <<"\nEnter today's date in dd/mm/yy format : ";
+				cin.ignore();
+				getline(cin,d);
+				flag2 = user.Check_date(d);
+			} while(flag2 == false);
 	}
+	user.date = d;
 
 	vector <string> usernames;
 	ofstream fout;
@@ -56,7 +78,7 @@ int main()
 					j=-1;
 				}
 			}
-			user.username = name; //storing the user id of the cureent user in the object variable
+			user.username = name;//storing the user id of the cureent user in the object variable
 			usernames.push_back(name); //adding new username to the usernames vector
 			break;
 
