@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//Function to Display the login/sign up options
 void Login_Screen()
 {
 	cout << "1. Do you want to create a new account?" << endl;
@@ -14,14 +15,15 @@ void Login_Screen()
 	cout << "\nPlease enter your prefered option : ";
 }
 
+//Function to coordinate login/sign up options and further user inputs
 int main()
 {
-	AccountHolder user;
+	AccountHolder user; //creating an object of the class for the current user
 	Login_Screen();
 	int userChoice, choice_of_action;
 	string name, username;
 	bool usernameExists, flag;
-	cin >> userChoice;
+	cin >> userChoice; //taking user input from login screen
 	flag = false;
 	if(userChoice != 3)
 	{
@@ -36,7 +38,7 @@ int main()
 	fin.open("userids.txt");
 	while(getline(fin, username))
 	{
-		usernames.push_back(username);
+		usernames.push_back(username); //creating a ventor with all user ids
 	}
 	fin.close();
 
@@ -45,15 +47,15 @@ int main()
 		case 1:
 			for(int j=0; j<usernames.size(); j++)
 			{
-				if(name==usernames[j])
+				if(name==usernames[j]) //checking if username enetered by the user is unique
 				{
 					cout << "Username already exists. Please enter another one." << endl;
 					getline(cin,name);
 					j=-1;
 				}
 			}
-			user.username = name;
-			usernames.push_back(name);
+			user.username = name; //storing the user id of the cureent user in the object variable
+			usernames.push_back(name); //adding new username to the usernames vector
 			break;
 
 		case 2:
@@ -67,9 +69,9 @@ int main()
 					break;
 				}
 			}
-			if(usernameExists==false)
+			if(usernameExists==false) //to check if username inputted is valid
 			{
-				while (flag == false)
+				while (flag == false) 
 				{
 					cout << "Username does not exist! Please try again." << endl;
 					getline(cin, name);
@@ -100,7 +102,7 @@ int main()
 	fout.open("userids.txt");
 	if(fout.fail())
 	{
-		cout << "Error in opening Userids.txt \n";
+		cout << "Error in opening Userids.txt \n"; //re-write file uderids with all usernames including the new signup (if any)
 		exit(1);
 	}
 	for(int j = 0; j<usernames.size(); j++)
@@ -109,7 +111,7 @@ int main()
 	}
 	fout.close();
 
-	user.readFromFile();
+	user.readFromFile(); //reading the users previous records from the text file created for them 
 	do
 	{
 		user.MainMenu();
@@ -117,6 +119,6 @@ int main()
 		cin >> choice_of_action;
 		user.ManageCommands(choice_of_action);
 	}while(choice_of_action != 7);
-	user.writeToFile();
+	user.writeToFile(); //writing the changes on to the user's text file after operations
 	return 0;
 }

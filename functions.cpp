@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//Function to check if budget has been reached
+//Function to check if budget has been reached (used in expensse management)
 void AccountHolder::BudgetCheck(double sum)
 {
 	if (budget-sum == 0)
@@ -38,21 +38,21 @@ void AccountHolder::ManageExpenses()
 		cout << endl;
 		cout << "\nPlease enter your choice : " ;
 		cin >> choice;
-		if (logs.category.size()==0)
-		{
+		if (logs.category.size()==0) //to check if there are any existing accounts to deduct expense from
+		{ 
 			cout<<"\nNo existing accounts found. Please create one first by choosing Option 4 in the menu below.\n"<<endl;
 			return;
 		}
-		if(budget==0)
+		if(budget==0) //to check if there is a budget to maintain
 		{
 			cout << "\nPlease set a budget first by choosing Option 3 in the menu below.\n";
 			break;
 		}
 		switch(choice)
 		{
-			case 1:
+			case 1: //exit to main menu
 				break;
-			case 2:
+			case 2: //add an expense
 				cout << "Which account do you want to deduct the expense from? : Enter the corresponding number.\n";
 				for(int i=0; i<logs.category.size(); i++)
 				{
@@ -70,13 +70,13 @@ void AccountHolder::ManageExpenses()
 					{
 						cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
 					}
-					cin >> accountChoice;
+					cin >> accountChoice; //taking input for account to deuct expense from
 				}
 				for(int i=0; i<expense.category.size(); i++)
 				{
 					if(NewExpenseType==expense.category[i])
 					{
-						expense.value[i] = expense.value[i] + NewExpenseValue;
+						expense.value[i] = expense.value[i] + NewExpenseValue; //adding expense to existing category
 						flag = true;
 						break;
 					}
@@ -84,22 +84,22 @@ void AccountHolder::ManageExpenses()
 				}
 				if(flag==false)
 				{
-					expense.category.push_back(NewExpenseType);
+					expense.category.push_back(NewExpenseType); //adding expense to new category
 					expense.value.push_back(NewExpenseValue);
 				}
 				for(int i=0; i<expense.category.size(); i++)
 				{
-					total = total + expense.value[i];
+					total = total + expense.value[i]; 
 				}
-				BudgetCheck(total);
+				BudgetCheck(total); //checking if budget has been reached
 				cout << "\nSuccessfully added new expense!\n" << endl;
 
-				logs.value[accountChoice-1] = logs.value[accountChoice-1] - NewExpenseValue;
-				total = 0;
+				logs.value[accountChoice-1] = logs.value[accountChoice-1] - NewExpenseValue; //deducting expense from account logs
+				total = 0; 
 
 				break;
 
-			case 3:
+			case 3: //edit an expense
 				if(!expense.category.empty())
 				{
 					cout << "Which expense would you like to edit? Enter the corresponding number. " << endl;
@@ -129,7 +129,7 @@ void AccountHolder::ManageExpenses()
 				}
 				break;
 
-			case 4:
+			case 4: //deleting an expense
 				if(!expense.category.empty())
 				{
 					cout << "Which expense would you like to delete? Enter the corresponding number. " << endl;
@@ -149,7 +149,7 @@ void AccountHolder::ManageExpenses()
 				}
 				break;
 
-			case 5:
+			case 5: //display all expenses 
 				for(int i=0; i<expense.category.size(); i++)
 				{
 					cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
@@ -193,10 +193,10 @@ void AccountHolder::ManageIncomes()
 		cin >> choice;
 		switch(choice)
 		{
-			case 1:
+			case 1: //back to main menu
 				break;
 
-			case 2:
+			case 2: //add an income
 				cout << "Which account do you want to add income to? Enter the corresponding number. \n";
 				for(int i=0; i<logs.category.size(); i++)
 				{
@@ -226,7 +226,7 @@ void AccountHolder::ManageIncomes()
 				cout << "\nSuccessfully added the income!\n" << endl;
 				break;
 
-			case 3:
+			case 3: //edit an income
 				if(!income.category.empty())
 				{
 					cout << "Which income would you like to edit? Enter the corresponding number." << endl;
@@ -250,8 +250,8 @@ void AccountHolder::ManageIncomes()
 					cout << "\nNo incomes to edit!\n" << endl;
 				}
 				break;
-
-			case 4:
+ 
+			case 4: //delete an income
 				if(!income.category.empty())
 				{
 					cout << "Which income would you like to delete? Enter the corresponding number." << endl;
@@ -271,7 +271,7 @@ void AccountHolder::ManageIncomes()
 				}
 				break;
 
-			case 5:
+			case 5: //view all incomes
 				for(int i=0; i<income.category.size(); i++)
 				{
 					cout << i+1 << " - " << income.category[i] << " HK$" << income.value[i] << endl;
@@ -313,16 +313,16 @@ void AccountHolder::ManageBudget()
 		cin >> choice;
 		switch(choice)
 		{
-			case 1:
+			case 1: //back to main menu
 				break;
 
-			case 2:
+			case 2: //create a new budget
 				cout << "Enter the new Budget : HK$";
 				cin >> budget;
 				cout << "\nBudget successfully changed!\n" << endl;
 				break;
 
-			case 3:
+			case 3: //view budget
 				for(int i=0; i<expense.category.size(); i++)
 				{
 					total = total + expense.value[i];
@@ -363,10 +363,10 @@ void AccountHolder::ManageAccountLogs()
 		cin >> choice;
 		switch(choice)
 		{
-			case 1:
+			case 1: //back to main menu
 				break;
 
-			case 2:
+			case 2: //add a new account log
 				cout << "Which account do you want to add? Please enter one word : ";
 				cin >> NewLog;
 				cout << "Please enter the amount in the account : HK$" ;
@@ -376,7 +376,7 @@ void AccountHolder::ManageAccountLogs()
 				cout << "\nSuccessfully added a new account log!\n" << endl;
 				break;
 
-			case 3:
+			case 3: //edit an existing account log
 				if(!logs.category.empty())
 				{
 					cout << "Which acount log would you like to edit? Enter the corresponding number.\n" << endl;
@@ -399,7 +399,7 @@ void AccountHolder::ManageAccountLogs()
 				}
 				break;
 
-			case 4:
+			case 4: //delete an account log
 				if(!logs.category.empty())
 				{
 					cout << "Which account log would you like to delete? Enter the corresponding number. \n" << endl;
@@ -418,7 +418,7 @@ void AccountHolder::ManageAccountLogs()
 				}
 				break;
 
-			case 5:
+			case 5: //view all account logs
 				cout<<"\n";
 				for(int i=0; i<logs.category.size(); i++)
 				{
