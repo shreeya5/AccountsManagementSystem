@@ -23,7 +23,14 @@ This menu driven program will create .txt files for all its respective users and
 3. **Forecasting** of next month's budget based on current daily expenditure.
 4.  View **percentage breakdown** of income, expenses and account logs and manage budget to help you analyse your personal finances by helping you keep a track of your income and expenditure sources.
 
-## User Inteface
+## Execution
+
+1. Clone our repository on your system using the following command
+> git clone https://github.com/engg1340-g31/AccountsManagementSystem
+2. Navigate to the local repository stored on your system using the *cd* command
+3. Run the program using the following command
+> make run
+4. Use the AccountsManagementSystem by following the instructions on the screen. 
 
  
 
