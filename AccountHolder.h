@@ -31,7 +31,7 @@ class AccountHolder
 		void writeToFile();
 
 	//the following variables are public as they are used by the three aforementioned .cpp files
-	string username;
+	string username, date;
 	double budget;
 	Account income, expense, logs;
 

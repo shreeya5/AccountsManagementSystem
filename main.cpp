@@ -73,7 +73,7 @@ int main()
 			}
 			if(usernameExists==false) //to check if username inputted is valid
 			{
-				while (flag == false) 
+				while (flag == false)
 				{
 					cout << "Username does not exist! Please try again." << endl;
 					getline(cin, name);
@@ -113,7 +113,7 @@ int main()
 	}
 	fout.close();
 
-	user.readFromFile(); //reading the users previous records from the text file created for them 
+	user.readFromFile(); //reading the users previous records from the text file created for them
 	do
 	{
 		user.MainMenu();
