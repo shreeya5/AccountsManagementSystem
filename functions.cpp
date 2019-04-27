@@ -59,7 +59,7 @@ void AccountHolder::ManageExpenses()
 					cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
 				}
 				cin >> accountChoice;
-				cout << "Please enter the type of expense : " ;
+				cout << "Please enter in one word, the type of expense : " ;
 				cin >> 	NewExpenseType;
 				cout << "Please enter the amount of expenditure : HK$" ;
 				cin >> NewExpenseValue;
@@ -102,13 +102,13 @@ void AccountHolder::ManageExpenses()
 			case 3:
 				if(!expense.category.empty())
 				{
-					cout << "Which expense would you like to edit?" << endl;
+					cout << "Which expense would you like to edit? Enter the corresponding number. " << endl;
 					for(int i=0; i<expense.category.size(); i++)
 					{
 						cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
 					}
 					cin >> editChoice;
-					cout << "Please enter the edited type of expense : " ;
+					cout << "Please enter in one word, the edited type of expense : " ;
 					cin >> 	UpdateType;
 					cout << "Please enter the edited amount of expenditure : HK$" ;
 					cin >> UpdateValue;
@@ -132,7 +132,7 @@ void AccountHolder::ManageExpenses()
 			case 4:
 				if(!expense.category.empty())
 				{
-					cout << "Which expense would you like to delete?" << endl;
+					cout << "Which expense would you like to delete? Enter the corresponding number. " << endl;
 					for(int i=0; i<expense.category.size(); i++)
 					{
 						cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
@@ -161,7 +161,7 @@ void AccountHolder::ManageExpenses()
 		}
 		if (choice!=5)
 		{
-			cout << "Current Expenses : " << endl;
+			cout << "\nCurrent Expenses :\n" << endl;
 			for(int i=0; i<expense.category.size(); i++)
 			{
 				cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
@@ -203,7 +203,7 @@ void AccountHolder::ManageIncomes()
 					cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
 				}
 				cin >> accountChoice;
-				cout << "Please enter the type of income : " ;
+				cout << "Please enter in one word, the type of income : " ;
 				cin >> NewIncomeType;
 				cout << "Please enter the amount of income : HK$" ;
 				cin >> NewIncomeValue;
@@ -229,14 +229,14 @@ void AccountHolder::ManageIncomes()
 			case 3:
 				if(!income.category.empty())
 				{
-					cout << "Which income would you like to edit?" << endl;
+					cout << "Which income would you like to edit? Enter the corresponding number." << endl;
 					for(int i=0; i<income.category.size(); i++)
 					{
 						cout << i+1 << " - " << income.category[i] << " HK$" << income.value[i] << endl;
 					}
 					cin >> editChoice;
 					logs.value[editChoice-1] = logs.value[editChoice-1] - income.value[editChoice-1];
-					cout << "Please enter the edited type of income : " ;
+					cout << "Please enter in one word, the edited type of income : " ;
 					cin >> 	UpdateType;
 					cout << "Please enter the edited amount of income : HK$" ;
 					cin >> UpdateValue;
@@ -254,7 +254,7 @@ void AccountHolder::ManageIncomes()
 			case 4:
 				if(!income.category.empty())
 				{
-					cout << "Which income would you like to delete?" << endl;
+					cout << "Which income would you like to delete? Enter the corresponding number." << endl;
 					for(int i=0; i<income.category.size(); i++)
 					{
 						cout << i+1 << " - " << income.category[i] << " HK$" << income.value[i] << endl;
@@ -317,7 +317,7 @@ void AccountHolder::ManageBudget()
 				break;
 
 			case 2:
-				cout << "Enter the new Budget : ";
+				cout << "Enter the new Budget : HK$";
 				cin >> budget;
 				cout << "\nBudget successfully changed!\n" << endl;
 				break;
@@ -367,7 +367,7 @@ void AccountHolder::ManageAccountLogs()
 				break;
 
 			case 2:
-				cout << "Which account do you want to add? ";
+				cout << "Which account do you want to add? Please enter one word : ";
 				cin >> NewLog;
 				cout << "Please enter the amount in the account : HK$" ;
 				cin >> amount;
@@ -385,7 +385,7 @@ void AccountHolder::ManageAccountLogs()
 						cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
 					}
 					cin >> editChoice;
-					cout << "Please enter the edited type of account log : " ;
+					cout << "Please enter in one word, the edited type of account log : " ;
 					cin >> 	editLog;
 					cout << "Please enter the edited amount of income : HK$" ;
 					cin >> editValue;
@@ -490,7 +490,7 @@ void AccountHolder::ViewStats()
 	{
 		cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
 	}
-	cout << "\n\nBudget : ";
+	cout << "\n\n Budget : \n";
 	double total=0 , budgetSpent=0;
 	for(int i=0; i<expense.category.size(); i++)
 	{
