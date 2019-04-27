@@ -20,8 +20,9 @@ int main()
 	Login_Screen();
 	int userChoice, choice_of_action;
 	string name, username;
-	bool usernameExists;
+	bool usernameExists, flag;
 	cin >> userChoice;
+	flag = false;
 	if(userChoice != 3)
 	{
 		cout<< "\nPlease enter username : ";
@@ -68,13 +69,26 @@ int main()
 			}
 			if(usernameExists==false)
 			{
-				cout << "Username does not exist." << endl;
-				exit(1);
+				while (flag == false)
+				{
+					cout << "Username does not exist! Please try again." << endl;
+					getline(cin, name);
+					for(int j=0; j<usernames.size(); j++)
+					{
+						if(name==usernames[j])
+						{
+							flag = true;
+							user.username = name;
+							usernames.push_back(name);
+							break;
+						}
+					}
+				}
 			}
 			break;
 		case 3:
 			cout <<"Successfully closed application"<<endl;
-			exit(1);
+			return 0;
 			break;
 
 		default:
