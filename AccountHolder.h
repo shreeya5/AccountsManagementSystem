@@ -29,7 +29,7 @@ class AccountHolder
 		void MainMenu();
 		void ManageCommands(int);
 		void writeToFile();
-		bool Check_date(string);
+		bool Check_date(string)
 
 	//the following variables are public as they are used by the three aforementioned .cpp files
 	string username, date;
