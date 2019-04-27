@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <iomanip>
 #include "AccountHolder.h"
 
 using namespace std;
@@ -15,6 +16,10 @@ void AccountHolder::BudgetCheck(double sum)
 	else if (budget-sum < 0)
 	{
 		cout << "Exceeded Budget Limit by HK$" << sum-budget << endl;
+	}
+	else
+	{
+		cout << "\n" << fixed << setprecision(2) << ((sum/budget)*100) << "% of budget reached" << endl;
 	}
 }
 
@@ -39,7 +44,7 @@ void AccountHolder::ManageExpenses()
 		cout << "\nPlease enter your choice : " ;
 		cin >> choice;
 		if (logs.category.size()==0) //to check if there are any existing accounts to deduct expense from
-		{ 
+		{
 			cout<<"\nNo existing accounts found. Please create one first by choosing Option 4 in the menu below.\n"<<endl;
 			return;
 		}
@@ -89,13 +94,13 @@ void AccountHolder::ManageExpenses()
 				}
 				for(int i=0; i<expense.category.size(); i++)
 				{
-					total = total + expense.value[i]; 
+					total = total + expense.value[i];
 				}
 				BudgetCheck(total); //checking if budget has been reached
 				cout << "\nSuccessfully added new expense!\n" << endl;
 
 				logs.value[accountChoice-1] = logs.value[accountChoice-1] - NewExpenseValue; //deducting expense from account logs
-				total = 0; 
+				total = 0;
 
 				break;
 
@@ -149,7 +154,7 @@ void AccountHolder::ManageExpenses()
 				}
 				break;
 
-			case 5: //display all expenses 
+			case 5: //display all expenses
 				for(int i=0; i<expense.category.size(); i++)
 				{
 					cout << i+1 << " - " << expense.category[i] << " HK$" << expense.value[i] << endl;
@@ -250,7 +255,7 @@ void AccountHolder::ManageIncomes()
 					cout << "\nNo incomes to edit!\n" << endl;
 				}
 				break;
- 
+
 			case 4: //delete an income
 				if(!income.category.empty())
 				{
@@ -477,6 +482,12 @@ void AccountHolder::ViewStats()
 		incomes = incomes + income.value[i];
 	}
 	cout << "\n Total Income : HK$" << incomes << endl;
+	//printing incomes by percentage
+	cout << "\n Income breakdown by %:\n"<<endl;
+	for(int i=0; i<income.category.size(); i++)
+	{
+		cout << income.category[i] << " : "<< fixed << setprecision(2) << (income.value[i]/incomes)*100 <<"% " << endl;
+	}
 	cout << "\n\n Expenses: \n";
 	double expenses=0;
 	for(int i=0; i<expense.category.size(); i++)
@@ -485,10 +496,24 @@ void AccountHolder::ViewStats()
 		expenses = expenses + expense.value[i];
 	}
 	cout << "\n Total Expense : HK$" << expenses << endl;
+	//printing expenses by percentage
+	cout << "\n Expense breakdown by %:\n"<<endl;
+	for(int i=0; i<expense.category.size(); i++)
+	{
+		cout << expense.category[i] << " : " << fixed << setprecision(2) << (expense.value[i]/expenses)*100 <<"% " << endl;
+	}
+	double logstotal = 0;
 	cout << "\n\n Account logs \n";
 	for(int i=0; i<logs.category.size(); i++)
 	{
 		cout << i+1 << " - " << logs.category[i] << " HK$" << logs.value[i] << endl;
+		logstotal = logstotal + logs.value[i];
+	}
+	//printing logs by percentage
+	cout << "\n Account logs breakdown by %:\n"<<endl;
+	for(int i=0; i<logs.category.size(); i++)
+	{
+		cout << logs.category[i] << " : " << fixed << setprecision(2) << (logs.value[i]/logstotal)*100 <<"% " << endl;
 	}
 	cout << "\n\n Budget : \n";
 	double total=0 , budgetSpent=0;
@@ -496,9 +521,41 @@ void AccountHolder::ViewStats()
 	{
 		total = total + expense.value[i];
 	}
+	cout << "Current budget set : HK$" << budget <<endl;
 	cout << "Budget left : HK$" << budget-total << endl;
 	budgetSpent = (total/budget)*100;
-	cout << "Percentage of budget spent : " << budgetSpent << "%" << endl;
+	cout << "Percentage of budget spent : " << fixed << setprecision(2) << budgetSpent << "%" << endl;
+
+	string dd,mm,yy;
+	int d,m,y;
+	dd = date.substr(0,2);
+	d = stoi(dd);
+	mm = date.substr(3,2);
+	m = stoi(mm);
+	yy = date.substr(6,2);
+	y = stoi(yy);
+	int nodays[12] = {31,28,31,30,31,30,31,31,30,31,30,31};//array to store number of days in each month
+	string month[12] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+	//Checking for leap year
+	if (((y % 4 == 0) && (y % 100 != 0)) || (y % 400 == 0))
+	{
+		nodays[1] = 29;
+	}
+	//calculating daily expenditure in order to meet budget
+	int daysleft = nodays[m-1] - d;
+	double budgetperday = (budget-total)/((double)daysleft);
+	cout << "\nProjected daily expenditure to meet your budget : HK$" << budgetperday << " per day\n" << endl;
+	double nextmonthbudget = 0.0;
+//calculating the budget for next month
+	if (d>15)
+	{
+		nextmonthbudget = (total/d)*nodays[m];
+	}
+	else
+	{
+		nextmonthbudget = (budget/nodays[m-1])*nodays[m];
+	}
+	cout << "\nProjected budget for the month of "<< month[m]<< " : HK$" << fixed << setprecision(2) << nextmonthbudget << "\n" << endl;
 }
 
 
