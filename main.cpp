@@ -29,7 +29,9 @@ int main()
 	{
 		cout<< "\nPlease enter username : ";
 		cin.ignore();
-		getline(cin,name);
+		getline(cin, name);
+		cout <<"\nEnter today's date in dd/mm/yy format : ";
+		getline(cin, user.date);
 	}
 
 	vector <string> usernames;
